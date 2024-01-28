@@ -1,3 +1,4 @@
+import 'package:calculator/calculatorScreen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,63 +14,57 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor:const Color.fromARGB(255, 219, 70, 25)),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const CalculatorScreen(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+// class MyCalculator extends StatefulWidget {
+//   const MyCalculator({super.key});
+//   // This class is the configuration for the state. It holds the values (in this
+//   // case the title) provided by the parent (in this case the App widget) and
+//   // used by the build method of the State. Fields in a Widget subclass are
+//   // always marked "final".
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
+//   @override
+//   State<MyCalculator> createState() => _MyCalcState();
+// }
 
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
+// class _MyCalcState extends State<MyCalculator> {
+//   @override
+//   Widget build(BuildContext context) {
+//     // This method is rerun every time setState is called, for instance as done
+//     // by the _incrementCounter method above.
+//     return Scaffold(
+//       appBar: AppBar(
+//         // backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+//         title: const Text(
+//           "Calculator",
+//           // style: TextStyle(color: Color.fromARGB(255, 0, 0, 0), fontSize: 24),
+//         ),
+//       ),
+//       body: GridView(
+//                 gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(
+//                   crossAxisCount: 2,
+//                   childAspectRatio:3/2,
+//                   crossAxisSpacing: 20,
+//                   mainAxisExtent: 20,
+//             ),
+//           children:const [
+//             Text("1", style: TextStyle(color: Colors.black),),
+//             Text("1", style: TextStyle(color: Colors.black),),
+//             Text("1", style: TextStyle(color: Colors.black),),
+//             Text("1", style: TextStyle(color: Colors.black),),
+//             Text("1", style: TextStyle(color: Colors.black),),
+//             Text("1", style: TextStyle(color: Colors.black),),
+//           ],  
+//           ),
 
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-
-  @override
-  Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text("Calculator", style: TextStyle(color: Color.fromARGB(255, 0, 0, 0), fontSize: 24),),
-      ),
-
-    );
-  }
-}
+          
+       
+//     );
+//   }
+// }
