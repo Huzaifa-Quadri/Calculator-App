@@ -11,6 +11,12 @@ class CalculatorScreen extends StatefulWidget {
 }
 
 class _CalculatorScreenState extends State<CalculatorScreen> {
+
+  // void onButtonPress(String numop){
+  //   final _selection == Btn.buttonValues.where((element) => )
+  // }
+
+
   @override
   Widget build(BuildContext context) {
     // final screenSize = MediaQuery.of(context);
@@ -29,6 +35,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
           children: [
             Container(
               alignment: Alignment.bottomRight,
+              height: 250,
               child: const Text(
                 "0",
                 textAlign: TextAlign.end,
