@@ -11,11 +11,20 @@ class CalculatorScreen extends StatefulWidget {
 }
 
 class _CalculatorScreenState extends State<CalculatorScreen> {
-
   // void onButtonPress(String numop){
   //   final _selection == Btn.buttonValues.where((element) => )
   // }
-
+  String number1 = ""; // . 0-9
+  String operator1 = ""; // =,/,
+  String number2 = ""; // . 0-9
+  void onBtnTap(String value) {
+    setState(() {
+      number1+= value;
+      operator1+= value;
+      number2+= value;
+    });
+    
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,10 +45,10 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
             Container(
               alignment: Alignment.bottomRight,
               height: 250,
-              child: const Text(
-                "0",
+              child: Text(
+                "$number1$operator1$number2".isEmpty ? "0" : "$number1$operator1$number2",
                 textAlign: TextAlign.end,
-                style: TextStyle(
+                style:const TextStyle(
                     color: Colors.white,
                     fontSize: 48,
                     fontWeight: FontWeight.bold),
@@ -49,8 +58,12 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
             Wrap(
               children: Btn.buttonValues
                   .map(
-                    (characters) => NumberButton(bvalue: characters),
-                  ).toList(),
+                    (characters) => NumberButton(
+                      bvalue: characters,
+                      onButtonPress: (String valueb) {onBtnTap(valueb);print(valueb);},
+                    ),
+                  )
+                  .toList(),
             )
           ],
         ),

@@ -2,10 +2,10 @@ import 'package:calculator/buttondata.dart';
 import 'package:flutter/material.dart';
 
 class NumberButton extends StatelessWidget {
-  const NumberButton({super.key, required this.bvalue});
+  const NumberButton({super.key, required this.bvalue, required this.onButtonPress});
   final String bvalue;
 
-  // final void  Function() onButtonPress;
+  final void  Function(String valueb) onButtonPress;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class NumberButton extends StatelessWidget {
     // );
     return InkWell(
       borderRadius: BorderRadius.circular(screenSize.width / 2),
-      onTap: (){},
+      onTap: (){onButtonPress(bvalue);},
       child: Container(
         // margin: EdgeInsets.all(2),
         width: bvalue==Btn.n0?screenSize.width/2 : screenSize.width / 4,
