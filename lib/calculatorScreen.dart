@@ -18,12 +18,68 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   String operator1 = ""; // =,/,
   String number2 = ""; // . 0-9
   void onBtnTap(String value) {
-    setState(() {
-      number1+= value;
-      operator1+= value;
-      number2+= value;
-    });
+    if (value == Btn.del) {
+      delete();
+      return;
+    }
+    if (value == Btn.clr) {
+      allclear();
+      return;
+    }
+    if (value == Btn.per) {
+      converttoper();
+      return;
+    }
+
     
+    valueinput(value);
+  }
+
+  void valueinput(String value){
+    if (value!=Btn.dot && int.tryParse(value)==null) {
+      if (operator1.isNotEmpty&&number2.isNotEmpty) {
+        //TODO: Calculate the equation before assigning new operand
+      }
+      operator1 = value;
+    }
+    else if(number1.isEmpty || operator1.isEmpty){
+      if (value == Btn.dot && number1.contains(Btn.dot)) return ; 
+      if (value == Btn.dot && (number1.isEmpty || number1 == Btn.n0)) {
+        //* number 1 = "" OR number1 = "."
+        value = "0.";
+      }
+      number1+=value; 
+    }
+    else if(number2.isEmpty || operator1.isNotEmpty){
+      if (value == Btn.dot && number2.contains(Btn.dot)) return ; 
+      if (value == Btn.dot && (number2.isEmpty || number2 == Btn.n0)) {
+        //* number 1 = "" OR number1 = "."
+        value = "0.";
+      } 
+      number2+=value;
+    }
+    setState(() {});
+  }
+
+    //! For delete button 
+  void delete(){
+    if (number2.isNotEmpty) {
+      number2 = number2.substring(0,number2.length-1);
+    }
+    else if(operator1.isNotEmpty){
+      operator1 = "";
+    }
+    else if(number1.isNotEmpty){
+      number1 = number1.substring(0,number1.length-1);
+    }
+    setState(() {});
+  }
+
+  void allclear(){
+    number1 = "";
+    operator1 ="";
+    number2 = "";
+    setState(() {});
   }
 
   @override
