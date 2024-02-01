@@ -27,7 +27,11 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       return;
     }
     if (value == Btn.per) {
-      converttoper();
+      converttopercentage();
+      return;
+    }
+    if (value == Btn.calculate) {
+      calculate();
       return;
     }
 
@@ -39,6 +43,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
     if (value!=Btn.dot && int.tryParse(value)==null) {
       if (operator1.isNotEmpty&&number2.isNotEmpty) {
         //TODO: Calculate the equation before assigning new operand
+        calculate();
       }
       operator1 = value;
     }
@@ -80,6 +85,21 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
     operator1 ="";
     number2 = "";
     setState(() {});
+  }
+
+  void converttopercentage(){
+
+    if (number1.isNotEmpty && operator1.isNotEmpty && number2.isNotEmpty) {
+      calculate();
+    }
+    if (operator1.isNotEmpty) return;
+
+    final number = double.parse(number1);
+    setState(() {
+      number1 = "${(number/100)}";
+      operator1 = "";
+      number2 = "";
+    });
   }
 
   @override
@@ -125,5 +145,37 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
         ),
       ),
     );
+  }
+  void calculate(){
+    if(number1.isEmpty) return;
+    if(operator1.isEmpty) return;
+    if(number2.isEmpty) return;
+    final double num1 = double.parse(number1);
+    final double num2 = double.parse(number2);
+    var result = 0.0;
+    switch (operator1) {
+      case Btn.add:
+        result = num1+num2;
+        break;
+      case Btn.subtract:
+        result = num1-num2;
+        break;
+      case Btn.multiply:
+        result = num1*num2;
+        break;
+      case Btn.divide:
+        result = num1/num2;
+        break;
+      default:
+    }
+
+    setState(() {
+      number1 = result.toStringAsPrecision(5);
+      if (number1.contains(".0")) {
+        number1 = number1.substring(0,number1.length-2);
+      }     
+      number2 = "";
+      operator1 = "";
+    });
   }
 }
