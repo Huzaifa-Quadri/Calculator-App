@@ -104,7 +104,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // final screenSize = MediaQuery.of(context);
+    final screenSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
           backgroundColor: Colors.blueGrey,
@@ -114,34 +114,38 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
             style: TextStyle(backgroundColor: Color.fromARGB(0, 0, 0, 0)),
           )),
       backgroundColor: const Color.fromARGB(255, 40, 40, 40),
-      body: SingleChildScrollView(
-        child: Column(
-          //* Output area
-          children: [
-            Container(
-              alignment: Alignment.bottomRight,
-              height: 250,
-              child: Text(
-                "$number1$operator1$number2".isEmpty ? "0" : "$number1$operator1$number2",
-                textAlign: TextAlign.end,
-                style:const TextStyle(
-                    color: Colors.white,
-                    fontSize: 48,
-                    fontWeight: FontWeight.bold),
+      body: SizedBox(
+        height: screenSize.height,
+        width: screenSize.width,
+        child: SingleChildScrollView(
+          child: Column(
+            //* Output area
+            children: [
+              Container(
+                alignment: Alignment.bottomRight,
+                height: 250,
+                child: Text(
+                  "$number1$operator1$number2".isEmpty ? "0" : "$number1$operator1$number2",
+                  textAlign: TextAlign.end,
+                  style:const TextStyle(
+                      color: Colors.white,
+                      fontSize: 48,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
-            ),
-            //button
-            Wrap(
-              children: Btn.buttonValues
-                  .map(
-                    (characters) => NumberButton(
-                      bvalue: characters,
-                      onButtonPress: (String valueb) {onBtnTap(valueb);print(valueb);},
-                    ),
-                  )
-                  .toList(),
-            )
-          ],
+              //button
+              Wrap(
+                children: Btn.buttonValues
+                    .map(
+                      (characters) => NumberButton(
+                          bvalue: characters,
+                          onButtonPress: (String valueb) {onBtnTap(valueb);},
+                        ),
+                      )
+                    .toList(),
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -173,6 +177,9 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       number1 = result.toStringAsPrecision(5);
       if (number1.contains(".0")) {
         number1 = number1.substring(0,number1.length-2);
+      }     
+      else if (number1.endsWith(".")) {
+        number1 = number1.substring(0,number1.length-1);
       }     
       number2 = "";
       operator1 = "";
